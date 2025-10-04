@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multi-Function Page</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    section { margin-bottom: 30px; }
+    input { margin: 5px; }
+    .output { margin-top: 10px; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Heading and Date/Time -->
+  <section>
+    <h1>Welcome to the Interactive Page</h1>
+    <iframe src="https://www.timeanddate.com/worldclock/" width="300" height="150" title="Current Date and Time"></iframe>
+  </section>
+
+  <!-- 2. Hyperlink to Calculate.html -->
+  <section>
+    <h2>Multiplication Table Generator</h2>
+    <input type="text" id="tableInput" placeholder="Enter a number">
+    <button onclick="generateTable()">Generate Table</button>
+    <div id="tableOutput" class="output"></div>
+    <p><a href="calculate.html">Go to Calculate Page</a></p>
+  </section>
+
+  <!-- 3. Username Generator -->
+  <section>
+    <h2>Create Username</h2>
+    <input type="text" id="fname" placeholder="First Name">
+    <input type="text" id="lname" placeholder="Last Name">
+    <input type="number" id="age" placeholder="Age">
+    <button onclick="createUsername()">Generate Username</button>
+    <div id="usernameOutput" class="output"></div>
+  </section>
+
+  <!-- 4. Student Object Update -->
+  <section>
+    <h2>Student Information</h2>
+    <input type="text" id="studFname" placeholder="First Name">
+    <input type="text" id="studLname" placeholder="Last Name">
+    <input type="number" id="studMarks" placeholder="Marks">
+    <button onclick="updateStudent()">Add Student Info</button>
+    <div id="studentOutput" class="output"></div>
+  </section>
+
+  <script>
+    // 2. Table Generator
+    function generateTable() {
+      const val = document.getElementById("tableInput").value;
+      const output = document.getElementById("tableOutput");
+      output.innerHTML = "";
+
+      if (val === "") {
+        alert("Please enter a number");
+        return;
+      }
+
+      const num = Number(val);
+      if (isNaN(num)) {
+        alert("Invalid number");
+        return;
+      }
+
+      let html = `<strong>Table of ${num}:</strong><br>`;
+      for (let i = 1; i <= 10; i++) {
+        html += `${num} × ${i} = ${num * i}<br>`;
+      }
+      output.innerHTML = html;
+    }
+
+    // 3. Username Generator
+    function createUsername() {
+      const fname = document.getElementById("fname").value.trim();
+      const lname = document.getElementById("lname").value.trim();
+      const age = document.getElementById("age").value.trim();
+      const output = document.getElementById("usernameOutput");
+
+      if (fname.length < 2 || lname.length < 2 || age === "") {
+        alert("Please enter valid First Name, Last Name, and Age");
+        return;
+      }
+
+      const username = fname.slice(0, 2).toLowerCase() + lname.slice(-2).toLowerCase() + age;
+      output.innerHTML = `Generated Username: <strong>${username}</strong>`;
+    }
+
+    // 4. Student Object Update
+    const stud = {
+      firstName: "John",
+      lastname: "",
+      marks: 48
+    };
+
+    function updateStudent() {
+      const f = document.getElementById("studFname").value.trim();
+      const l = document.getElementById("studLname").value.trim();
+      const m = document.getElementById("studMarks").value.trim();
+      const output = document.getElementById("studentOutput");
+
+      if (f === "" || l === "" || m === "") {
+        alert("Please fill all student fields");
+        return;
+      }
+
+      stud.firstName = f;
+      stud.lastname = l;
+      stud.marks = Number(m);
+
+      output.innerHTML = `
+        <strong>Student Info:</strong><br>
+        First Name: ${stud.firstName}<br>
+        Last Name: ${stud.lastname}<br>
+        Marks: ${stud.marks}
+      `;
+    }
+  </script>
+
+</body>
+</html>

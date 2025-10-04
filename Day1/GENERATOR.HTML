@@ -1,0 +1,58 @@
+<!-- accept data from user using input fields 
+      firstName LastName age 	  
+	  create username of User dynamically 
+      take 1st 2 characters from firstName
+	  take last 2 characters from lastName
+	  and age 
+	  
+	  eg Amit Patil 30 === amil30 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Username Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    input { margin: 5px; padding: 5px; }
+    button { padding: 5px 10px; }
+    #result { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h1>Create Your Username</h1>
+
+  <label>First Name:</label>
+  <input type="text" id="firstName" placeholder="e.g. Amit"><br>
+
+  <label>Last Name:</label>
+  <input type="text" id="lastName" placeholder="e.g. Patil"><br>
+
+  <label>Age:</label>
+  <input type="number" id="age" placeholder="e.g. 30"><br>
+
+  <button onclick="generateUsername()">Generate Username</button>
+
+  <div id="result"></div>
+
+  <script>
+    function generateUsername() {
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const age = document.getElementById("age").value.trim();
+
+      if (firstName.length < 2 || lastName.length < 2 || age === "") {
+        alert("Please enter valid First Name, Last Name, and Age.");
+        return;
+      }
+
+      const username = firstName.slice(0, 2).toLowerCase() +
+                       lastName.slice(-2).toLowerCase() +
+                       age;
+
+      document.getElementById("result").innerHTML = `Your username is: <strong>${username}</strong>`;
+    }
+  </script>
+
+</body>
+</html>

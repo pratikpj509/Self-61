@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Info</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    input { margin: 5px; padding: 5px; }
+    button { padding: 5px 10px; }
+    #output { margin-top: 15px; border: 1px solid #ccc; padding: 10px; }
+  </style>
+</head>
+<body>
+
+  <h1>Enter Student Information</h1>
+
+  <label>First Name:</label>
+  <input type="text" id="firstName" placeholder="e.g. John"><br>
+
+  <label>Last Name:</label>
+  <input type="text" id="lastName" placeholder="e.g. Doe"><br>
+
+  <label>Marks:</label>
+  <input type="number" id="marks" placeholder="e.g. 85"><br>
+
+  <button onclick="updateStudent()">Add Student Info</button>
+
+  <div id="output"></div>
+
+  <script>
+    // Initial student object
+    // const stud = {
+    //   firstName: "John",
+    //   lastname: "",
+    //   marks: 48
+    // };
+
+    function updateStudent() {
+      // Get values from input fields
+      const fName = document.getElementById("firstName").value.trim();
+      const lName = document.getElementById("lastName").value.trim();
+      const mark = document.getElementById("marks").value.trim();
+
+      // Validate input
+      if (fName === "" || lName === "" || mark === "") {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      // Update object
+    //   stud.firstName = fName;
+    //   stud.lastname = lName;
+    //   stud.marks = Number(mark);
+
+      // Display updated object
+    //   document.getElementById("output").innerHTML = `
+    //     <strong>Student Details:</strong><br>
+    //     First Name: ${stud.firstName}<br>
+    //     Last Name: ${stud.lastname}<br>
+    //     Marks: ${stud.marks}
+    //   `;
+
+    document.getElementById("output").innerHTML = `
+        <strong>Student Details:</strong><br>
+        First Name: ${fName}<br>
+        Last Name: ${lName}<br>
+        Marks: ${mark}
+      `;
+    }
+  </script>
+
+</body>
+</html>
