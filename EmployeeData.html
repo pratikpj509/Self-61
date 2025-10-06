@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Data Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Employee Data Entry Form</h2>
+    
+    <div class="error" id="errorMsg"></div>
+
+    <form id="employeeForm">
+        <label>First Name: <input type="text" id="firstName"></label><br><br>
+        <label>Last Name: <input type="text" id="lastName"></label><br><br>
+        <label>Email: <input type="email" id="email"></label><br><br>
+        <label>Date of Birth: <input type="date" id="dob"></label><br><br>
+        <button type="submit">Add Employee</button>
+    </form>
+
+    <table id="employeeTable">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Employee rows will be added here -->
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('employeeForm');
+        const errorMsg = document.getElementById('errorMsg');
+        const tableBody = document.getElementById('employeeTable').querySelector('tbody');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const dob = document.getElementById('dob').value;
+
+            // Validation
+            if (!firstName || !lastName || !email || !dob) {
+                errorMsg.textContent = "All fields are required!";
+                return;
+            }
+
+            errorMsg.textContent = ""; // Clear error
+
+            // Create a new row
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td>${firstName}</td>
+                <td>${lastName}</td>
+                <td>${email}</td>
+                <td>${dob}</td>
+                <td>
+                    <button onclick="editRow(this)">Edit</button>
+                    <button onclick="deleteRow(this)">Delete</button>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+
+            // Clear fields
+            form.reset();
+        });
+
+        // Edit function
+        function editRow(btn) {
+            const row = btn.parentElement.parentElement;
+            const cells = row.querySelectorAll('td');
+
+            document.getElementById('firstName').value = cells[0].textContent;
+            document.getElementById('lastName').value = cells[1].textContent;
+            document.getElementById('email').value = cells[2].textContent;
+            document.getElementById('dob').value = cells[3].textContent;
+
+            // Remove the current row
+            row.remove();
+        }
+
+        // Delete function
+        function deleteRow(btn) {
+            const row = btn.parentElement.parentElement;
+            row.remove();
+        }
+    </script>
+
+</body>
+</html>
